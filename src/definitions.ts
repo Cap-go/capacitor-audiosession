@@ -43,9 +43,9 @@ export interface AudioSessionPlugin {
   addListener(
     eventName: 'routeChanged',
     listenerFunc: RouteChangeListener,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
   addListener(
     eventName: 'interruption',
     listenerFunc: InterruptionListener,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
 }
