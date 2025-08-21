@@ -1,4 +1,11 @@
-# @studiokloek/capacitor-plugin-audiosession
+# @capgo/capacitor-plugin-audiosession
+ <a href="https://capgo.app/"><img src='https://raw.githubusercontent.com/Cap-go/capgo/main/assets/capgo_banner.png' alt='Capgo - Instant updates for capacitor'/></a>
+
+<div align="center">
+  <h2><a href="https://capgo.app/?ref=plugin"> ➡️ Get Instant updates for your App with Capgo</a></h2>
+  <h2><a href="https://capgo.app/consulting/?ref=plugin"> Missing a feature? We’ll build the plugin for you 💪</a></h2>
+</div>
+
 
 **This plugin works on iOS only.**
 
@@ -7,7 +14,7 @@ This plugin is a port of <https://github.com/saghul/cordova-plugin-audioroute> a
 ## Install
 
 ```bash
-npm install @studiokloek/capacitor-plugin-audiosession
+npm install @capgo/capacitor-plugin-audiosession
 npx cap sync
 ```
 
@@ -19,8 +26,8 @@ For now this plugin works only in Capacitor 4.0+.
 
 * [`currentOutputs()`](#currentoutputs)
 * [`overrideOutput(...)`](#overrideoutput)
-* [`addListener('routeChanged', ...)`](#addlistenerroutechanged)
-* [`addListener('interruption', ...)`](#addlistenerinterruption)
+* [`addListener('routeChanged', ...)`](#addlistenerroutechanged-)
+* [`addListener('interruption', ...)`](#addlistenerinterruption-)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 * [Enums](#enums)
@@ -59,7 +66,7 @@ overrideOutput(type: OutputOverrideType) => Promise<OverrideResult>
 ### addListener('routeChanged', ...)
 
 ```typescript
-addListener(eventName: 'routeChanged', listenerFunc: RouteChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'routeChanged', listenerFunc: RouteChangeListener) => Promise<PluginListenerHandle>
 ```
 
 | Param              | Type                                                                |
@@ -67,7 +74,7 @@ addListener(eventName: 'routeChanged', listenerFunc: RouteChangeListener) => Pro
 | **`eventName`**    | <code>'routeChanged'</code>                                         |
 | **`listenerFunc`** | <code><a href="#routechangelistener">RouteChangeListener</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 --------------------
 
@@ -75,7 +82,7 @@ addListener(eventName: 'routeChanged', listenerFunc: RouteChangeListener) => Pro
 ### addListener('interruption', ...)
 
 ```typescript
-addListener(eventName: 'interruption', listenerFunc: InterruptionListener) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'interruption', listenerFunc: InterruptionListener) => Promise<PluginListenerHandle>
 ```
 
 | Param              | Type                                                                  |
@@ -83,7 +90,7 @@ addListener(eventName: 'interruption', listenerFunc: InterruptionListener) => Pr
 | **`eventName`**    | <code>'interruption'</code>                                           |
 | **`listenerFunc`** | <code><a href="#interruptionlistener">InterruptionListener</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 --------------------
 
@@ -168,6 +175,6 @@ MIT
 
 ## Author
 
-Martijn Swart <https://studiokloek.nl>
+Martijn Swart <https://capgo.nl>
 
 Based on work from: Saúl Ibarra Corretgé <saghul@gmail.com>
