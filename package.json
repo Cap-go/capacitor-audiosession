@@ -1,6 +1,6 @@
 {
   "name": "@capgo/capacitor-plugin-audio-session",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "This capacitor plugin allows iOS applications to get notified audio about interrupts & route changes (for example when a headset is connected), and also query and override the audio device in use.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
