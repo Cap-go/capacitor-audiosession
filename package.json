@@ -1,5 +1,5 @@
 {
-  "name": "@capgo/capacitor-plugin-audio-session",
+  "name": "@capgo/capacitor-plugin-audiosession",
   "version": "7.0.1",
   "description": "This capacitor plugin allows iOS applications to get notified audio about interrupts & route changes (for example when a headset is connected), and also query and override the audio device in use.",
   "main": "dist/plugin.cjs.js",
@@ -19,10 +19,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cap-go/capacitor-plugin-audio-session.git"
+    "url": "git+https://github.com/cap-go/capacitor-plugin-audiosession.git"
   },
   "bugs": {
-    "url": "https://github.com/cap-go/capacitor-plugin-audio-session/issues"
+    "url": "https://github.com/cap-go/capacitor-plugin-audiosession/issues"
   },
   "keywords": [
     "capacitor",
