@@ -80,18 +80,12 @@ export interface AudioSessionPlugin {
    * @param eventName The route change event name.
    * @param listenerFunc Callback invoked with the route change reason.
    */
-  addListener(
-    eventName: 'routeChanged',
-    listenerFunc: RouteChangeListener,
-  ): Promise<PluginListenerHandle>;
+  addListener(eventName: 'routeChanged', listenerFunc: RouteChangeListener): Promise<PluginListenerHandle>;
   /**
    * Listen for audio session interruptions (e.g. incoming call) and their end.
    *
    * @param eventName The interruption event name.
    * @param listenerFunc Callback invoked with the interruption type.
    */
-  addListener(
-    eventName: 'interruption',
-    listenerFunc: InterruptionListener,
-  ): Promise<PluginListenerHandle>;
+  addListener(eventName: 'interruption', listenerFunc: InterruptionListener): Promise<PluginListenerHandle>;
 }
