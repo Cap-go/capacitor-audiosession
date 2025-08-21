@@ -37,11 +37,18 @@ For now this plugin works only in Capacitor 4.0+.
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
+iOS-only plugin to query and control the audio session output and listen to
+route changes and interruptions.
+
 ### currentOutputs()
 
 ```typescript
 currentOutputs() => Promise<AudioSessionPorts[]>
 ```
+
+Get the current active audio output routes.
+
+On web and non-iOS platforms, this resolves to an empty array.
 
 **Returns:** <code>Promise&lt;AudioSessionPorts[]&gt;</code>
 
@@ -54,9 +61,14 @@ currentOutputs() => Promise<AudioSessionPorts[]>
 overrideOutput(type: OutputOverrideType) => Promise<OverrideResult>
 ```
 
-| Param      | Type                                                              |
-| ---------- | ----------------------------------------------------------------- |
-| **`type`** | <code><a href="#outputoverridetype">OutputOverrideType</a></code> |
+Override the current audio output route.
+
+Use `speaker` to force playback through the built-in speaker, or
+`default` to restore the system-selected route.
+
+| Param      | Type                                                              | Description                       |
+| ---------- | ----------------------------------------------------------------- | --------------------------------- |
+| **`type`** | <code><a href="#outputoverridetype">OutputOverrideType</a></code> | The desired output override type. |
 
 **Returns:** <code>Promise&lt;<a href="#overrideresult">OverrideResult</a>&gt;</code>
 
@@ -69,10 +81,12 @@ overrideOutput(type: OutputOverrideType) => Promise<OverrideResult>
 addListener(eventName: 'routeChanged', listenerFunc: RouteChangeListener) => Promise<PluginListenerHandle>
 ```
 
-| Param              | Type                                                                |
-| ------------------ | ------------------------------------------------------------------- |
-| **`eventName`**    | <code>'routeChanged'</code>                                         |
-| **`listenerFunc`** | <code><a href="#routechangelistener">RouteChangeListener</a></code> |
+Listen for audio route changes (e.g. headset connected/disconnected).
+
+| Param              | Type                                                                | Description                                    |
+| ------------------ | ------------------------------------------------------------------- | ---------------------------------------------- |
+| **`eventName`**    | <code>'routeChanged'</code>                                         | The route change event name.                   |
+| **`listenerFunc`** | <code><a href="#routechangelistener">RouteChangeListener</a></code> | Callback invoked with the route change reason. |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
@@ -85,10 +99,12 @@ addListener(eventName: 'routeChanged', listenerFunc: RouteChangeListener) => Pro
 addListener(eventName: 'interruption', listenerFunc: InterruptionListener) => Promise<PluginListenerHandle>
 ```
 
-| Param              | Type                                                                  |
-| ------------------ | --------------------------------------------------------------------- |
-| **`eventName`**    | <code>'interruption'</code>                                           |
-| **`listenerFunc`** | <code><a href="#interruptionlistener">InterruptionListener</a></code> |
+Listen for audio session interruptions (e.g. incoming call) and their end.
+
+| Param              | Type                                                                  | Description                                  |
+| ------------------ | --------------------------------------------------------------------- | -------------------------------------------- |
+| **`eventName`**    | <code>'interruption'</code>                                           | The interruption event name.                 |
+| **`listenerFunc`** | <code><a href="#interruptionlistener">InterruptionListener</a></code> | Callback invoked with the interruption type. |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
@@ -110,20 +126,30 @@ addListener(eventName: 'interruption', listenerFunc: InterruptionListener) => Pr
 
 #### OverrideResult
 
+Result of an output override request.
+
 <code>{ success: boolean; message: string; }</code>
 
 
 #### OutputOverrideType
+
+Output override type.
+- `default`: Use the system-selected route.
+- `speaker`: Force playback through the built-in speaker.
 
 <code>'default' | 'speaker'</code>
 
 
 #### RouteChangeListener
 
+Listener called when the audio route changes.
+
 <code>(reason: <a href="#routechangereasons">RouteChangeReasons</a>): void</code>
 
 
 #### InterruptionListener
+
+Listener called when the audio session is interrupted or ends.
 
 <code>(type: <a href="#interruptiontypes">InterruptionTypes</a>): void</code>
 
@@ -173,8 +199,3 @@ addListener(eventName: 'interruption', listenerFunc: InterruptionListener) => Pr
 
 MIT
 
-## Author
-
-Martijn Swart <https://capgo.nl>
-
-Based on work from: Saúl Ibarra Corretgé <saghul@gmail.com>

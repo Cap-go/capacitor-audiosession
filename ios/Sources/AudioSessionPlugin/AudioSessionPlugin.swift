@@ -2,7 +2,13 @@ import Foundation
 import Capacitor
 
 @objc(AudioSessionPlugin)
-public class AudioSessionPlugin: CAPPlugin {
+public class AudioSessionPlugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "AudioSessionPlugin"
+    public let jsName = "AudioSession"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "currentOutputs", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "overrideOutput", returnType: CAPPluginReturnPromise),
+    ]
     private let implementation = AudioSession()
 
     override public func load() {
