@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.0.6](https://github.com/cap-go/capacitor-plugin-audiosession/compare/7.0.5...7.0.6) (2025-10-08)
+
+
+### Bug Fixes
+
+* swift version ([be1acc7](https://github.com/cap-go/capacitor-plugin-audiosession/commit/be1acc75856c9b3aadc78e7cc0fbc9b42eb7e0a8))
+
 ## [7.0.5](https://github.com/cap-go/capacitor-plugin-audiosession/compare/7.0.4...7.0.5) (2025-10-08)
 
 ## [7.0.4](https://github.com/cap-go/capacitor-plugin-audiosession/compare/7.0.3...7.0.4) (2025-10-08)
