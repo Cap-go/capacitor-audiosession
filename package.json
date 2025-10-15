@@ -19,10 +19,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cap-go/capacitor-audiosession.git"
+    "url": "git+https://github.com/Cap-go/capacitor-audiosession.git"
   },
   "bugs": {
-    "url": "https://github.com/cap-go/capacitor-audiosession/issues"
+    "url": "https://github.com/Cap-go/capacitor-audiosession/issues"
   },
   "keywords": [
     "capacitor",
