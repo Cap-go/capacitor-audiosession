@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.0.12](https://github.com/Cap-go/capacitor-audiosession/compare/7.0.11...7.0.12) (2025-10-15)
+
+
+### Bug Fixes
+
+* npm publish ([c04e85f](https://github.com/Cap-go/capacitor-audiosession/commit/c04e85f1b5f5391cca3235b285728ba37d695ddc))
+
 ## [7.0.11](https://github.com/cap-go/capacitor-audiosession/compare/7.0.10...7.0.11) (2025-10-15)
 
 
