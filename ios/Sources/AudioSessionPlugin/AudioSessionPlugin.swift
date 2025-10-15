@@ -7,7 +7,7 @@ public class AudioSessionPlugin: CAPPlugin, CAPBridgedPlugin {
     public let jsName = "AudioSession"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "currentOutputs", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "overrideOutput", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "overrideOutput", returnType: CAPPluginReturnPromise)
     ]
     private let implementation = AudioSession()
 
@@ -39,7 +39,7 @@ public class AudioSessionPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func overrideOutput(_ call: CAPPluginCall) {
         let output = call.getString("type") ?? "unknown"
 
-        implementation.overrideOutput(_output: output) { (success, message, error) -> Void in
+        implementation.overrideOutput(_output: output) { (success, message, error) in
             if error == true {
                 call.reject(message ?? "")
             } else {
