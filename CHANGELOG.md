@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.0.9](https://github.com/cap-go/capacitor-plugin-audiosession/compare/7.0.8...7.0.9) (2025-10-15)
+
+
+### Bug Fixes
+
+* lint config ([a2f2060](https://github.com/cap-go/capacitor-plugin-audiosession/commit/a2f2060d953c3eb331f2b361bb2ec85ebc843007))
+
 ## [7.0.8](https://github.com/cap-go/capacitor-plugin-audiosession/compare/7.0.7...7.0.8) (2025-10-14)
 
 ## [7.0.7](https://github.com/cap-go/capacitor-plugin-audiosession/compare/7.0.6...7.0.7) (2025-10-08)
