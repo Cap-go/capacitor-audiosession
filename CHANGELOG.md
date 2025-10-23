@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.1.1](https://github.com/Cap-go/capacitor-audiosession/compare/7.1.0...7.1.1) (2025-10-23)
+
+
+### Bug Fixes
+
+* update Discord webhook username to include repository name ([7c76e2c](https://github.com/Cap-go/capacitor-audiosession/commit/7c76e2c56e81278bb8cab29ab15df92c44739a88))
+
 ## [7.1.0](https://github.com/Cap-go/capacitor-audiosession/compare/7.0.12...7.1.0) (2025-10-23)
 
 
