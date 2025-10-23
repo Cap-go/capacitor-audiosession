@@ -17,4 +17,8 @@ export class AudioSessionWeb extends WebPlugin implements AudioSessionPlugin {
       message: '',
     };
   }
+
+  async getPluginVersion(): Promise<{ version: string }> {
+    return { version: 'web' };
+  }
 }

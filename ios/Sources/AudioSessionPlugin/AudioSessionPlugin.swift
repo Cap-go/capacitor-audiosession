@@ -3,11 +3,13 @@ import Capacitor
 
 @objc(AudioSessionPlugin)
 public class AudioSessionPlugin: CAPPlugin, CAPBridgedPlugin {
+    private let PLUGIN_VERSION: String = ""
     public let identifier = "AudioSessionPlugin"
     public let jsName = "AudioSession"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "currentOutputs", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "overrideOutput", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "overrideOutput", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getPluginVersion", returnType: CAPPluginReturnPromise)
     ]
     private let implementation = AudioSession()
 
@@ -50,4 +52,9 @@ public class AudioSessionPlugin: CAPPlugin, CAPBridgedPlugin {
             }
         }
     }
+
+    @objc func getPluginVersion(_ call: CAPPluginCall) {
+        call.resolve(["version": self.PLUGIN_VERSION])
+    }
+
 }
