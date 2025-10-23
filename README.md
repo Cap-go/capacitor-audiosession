@@ -28,6 +28,7 @@ For now this plugin works only in Capacitor 4.0+.
 * [`overrideOutput(...)`](#overrideoutput)
 * [`addListener('routeChanged', ...)`](#addlistenerroutechanged-)
 * [`addListener('interruption', ...)`](#addlistenerinterruption-)
+* [`getPluginVersion()`](#getpluginversion)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 * [Enums](#enums)
@@ -107,6 +108,19 @@ Listen for audio session interruptions (e.g. incoming call) and their end.
 | **`listenerFunc`** | <code><a href="#interruptionlistener">InterruptionListener</a></code> | Callback invoked with the interruption type. |
 
 **Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+--------------------
+
+
+### getPluginVersion()
+
+```typescript
+getPluginVersion() => Promise<{ version: string; }>
+```
+
+Get the native Capacitor plugin version
+
+**Returns:** <code>Promise&lt;{ version: string; }&gt;</code>
 
 --------------------
 

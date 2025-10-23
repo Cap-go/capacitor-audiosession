@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.1.0](https://github.com/Cap-go/capacitor-audiosession/compare/7.0.12...7.1.0) (2025-10-23)
+
+
+### Features
+
+* add getPluginVersion method to AudioSession plugin and update workflows for changelog generation ([ce0c7c1](https://github.com/Cap-go/capacitor-audiosession/commit/ce0c7c1cc4d48f5e7590a8c976d320e285c208db))
+
+
+### Bug Fixes
+
+* remove default content message from Discord webhook ([20f4a58](https://github.com/Cap-go/capacitor-audiosession/commit/20f4a58c514b3ac85222d65989110c3dd89b0da0))
+
 ## [7.0.12](https://github.com/Cap-go/capacitor-audiosession/compare/7.0.11...7.0.12) (2025-10-15)
 
 
