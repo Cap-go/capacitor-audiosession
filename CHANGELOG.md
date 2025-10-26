@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.1.5](https://github.com/Cap-go/capacitor-audiosession/compare/7.1.4...7.1.5) (2025-10-26)
+
 ## [7.1.4](https://github.com/Cap-go/capacitor-audiosession/compare/7.1.3...7.1.4) (2025-10-26)
 
 
