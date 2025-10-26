@@ -11,6 +11,10 @@
 
 This plugin is a port of <https://github.com/saghul/cordova-plugin-audioroute> and allows iOS applications to get notified about audio session interruptions and route changes (for example when a headset is connected). To query and override the audio device in use is also supported.
 
+## Documentation
+
+The most complete doc is available here: https://capgo.app/docs/plugins/audiosession/
+
 ## Install
 
 ```bash
