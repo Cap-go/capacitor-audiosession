@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 @CapacitorPlugin(name = "AudioSession")
 public class AudioSessionPlugin extends Plugin {
-    private final String PLUGIN_VERSION = "7.1.3";
+    private final String PLUGIN_VERSION = "7.1.4";
 
     public static String LOG_TAG = "CapgoAudioSession";
 
