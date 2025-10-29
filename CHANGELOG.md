@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.1.8](https://github.com/Cap-go/capacitor-audiosession/compare/7.1.7...7.1.8) (2025-10-29)
+
+
+### Bug Fixes
+
+* CI/CD config ([4aa942a](https://github.com/Cap-go/capacitor-audiosession/commit/4aa942acebcc2a1c87d938b91eee1e28615900a9))
+* update AI model in build workflow ([6d57707](https://github.com/Cap-go/capacitor-audiosession/commit/6d57707ef0560f913ad5984dc06c636b7d56e6f2))
+* update github action ([3029651](https://github.com/Cap-go/capacitor-audiosession/commit/3029651ff195a42915ed97aaf04ca2d3667e791c))
+
 ## [7.1.7](https://github.com/Cap-go/capacitor-audiosession/compare/7.1.6...7.1.7) (2025-10-27)
 
 
