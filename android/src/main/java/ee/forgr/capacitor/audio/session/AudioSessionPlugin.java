@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 @CapacitorPlugin(name = "AudioSession")
 public class AudioSessionPlugin extends Plugin {
-    private final String PLUGIN_VERSION = "7.1.8";
+    private final String pluginVersion = "7.1.8";
 
     public static String LOG_TAG = "CapgoAudioSession";
 
@@ -35,7 +35,7 @@ public class AudioSessionPlugin extends Plugin {
     public void getPluginVersion(final PluginCall call) {
         try {
             final JSObject ret = new JSObject();
-            ret.put("version", this.PLUGIN_VERSION);
+            ret.put("version", this.pluginVersion);
             call.resolve(ret);
         } catch (final Exception e) {
             call.reject("Could not get plugin version", e);
