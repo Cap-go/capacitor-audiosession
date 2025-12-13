@@ -41,7 +41,7 @@ public class AudioSessionPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func overrideOutput(_ call: CAPPluginCall) {
         let output = call.getString("type") ?? "unknown"
 
-        implementation.overrideOutput(_output: output) { (success, message, error) in
+        implementation.overrideOutput(output: output, callback: { (success, message, error) in
             if error == true {
                 call.reject(message ?? "")
             } else {
@@ -50,7 +50,7 @@ public class AudioSessionPlugin: CAPPlugin, CAPBridgedPlugin {
                     "message": message ?? ""
                 ])
             }
-        }
+        })
     }
 
     @objc func getPluginVersion(_ call: CAPPluginCall) {

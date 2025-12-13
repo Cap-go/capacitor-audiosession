@@ -2,12 +2,12 @@ import Foundation
 import Capacitor
 import AVKit
 
-var AudioSessionOverrideTypes: [AVAudioSession.PortOverride: String] = [
+var audioSessionOverrideTypes: [AVAudioSession.PortOverride: String] = [
     .none: "none",
     .speaker: "speaker"
 ]
 
-var AudioSessionRouteChangeReasons: [AVAudioSession.RouteChangeReason: String] = [
+var audioSessionRouteChangeReasons: [AVAudioSession.RouteChangeReason: String] = [
     .newDeviceAvailable: "new-device-available",
     .oldDeviceUnavailable: "old-device-unavailable",
     .categoryChange: "category-change",
@@ -18,12 +18,12 @@ var AudioSessionRouteChangeReasons: [AVAudioSession.RouteChangeReason: String] =
     .unknown: "unknown"
 ]
 
-var AudioSessionInterruptionTypes: [AVAudioSession.InterruptionType: String] = [
+var audioSessionInterruptionTypes: [AVAudioSession.InterruptionType: String] = [
     .began: "began",
     .ended: "ended"
 ]
 
-var AudioSessionPorts: [AVAudioSession.Port: String] = [
+var audioSessionPorts: [AVAudioSession.Port: String] = [
     .airPlay: "airplay",
     .bluetoothLE: "bluetooth-le",
     .bluetoothHFP: "bluetooth-hfp",
@@ -47,14 +47,14 @@ public class AudioSession: NSObject {
     var currentOverride: String?
 
     public func load() {
-        let nc = NotificationCenter.default
+        let notificationCenter = NotificationCenter.default
 
-        nc.addObserver(self,
+        notificationCenter.addObserver(self,
                        selector: #selector(self.handleRouteChange),
                        name: AVAudioSession.routeChangeNotification,
                        object: nil)
 
-        nc.addObserver(self,
+        notificationCenter.addObserver(self,
                        selector: #selector(self.handleInterruption),
                        name: AVAudioSession.interruptionNotification,
                        object: AVAudioSession.sharedInstance)
@@ -66,7 +66,7 @@ public class AudioSession: NSObject {
         guard let userInfo = notification.userInfo,
               let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
               let reasonType = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else { return }
-        let readableReason = AudioSessionRouteChangeReasons[reasonType] ?? "unknown"
+        let readableReason = audioSessionRouteChangeReasons[reasonType] ?? "unknown"
 
         CAPLog.print("AudioSession.handleRouteChange() changed to \(readableReason)")
 
@@ -77,7 +77,7 @@ public class AudioSession: NSObject {
         guard let userInfo = notification.userInfo,
               let interruptValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
               let interruptType = AVAudioSession.InterruptionType(rawValue: interruptValue) else { return }
-        let readableInterrupt = AudioSessionInterruptionTypes[interruptType] ?? "unknown"
+        let readableInterrupt = audioSessionInterruptionTypes[interruptType] ?? "unknown"
 
         CAPLog.print("AudioSession.handleInterruption() interrupted status to \(readableInterrupt)")
 
@@ -87,18 +87,18 @@ public class AudioSession: NSObject {
     // METHODS
 
     public func currentOutputs() -> [String?] {
-        let outputs = AVAudioSession.sharedInstance().currentRoute.outputs.map({AudioSessionPorts[$0.portType]})
+        let outputs = AVAudioSession.sharedInstance().currentRoute.outputs.map({audioSessionPorts[$0.portType]})
 
         return outputs
     }
 
-    public func overrideOutput(_output: String, _callback: @escaping AudioSessionOverrideCallback) {
-        if _output == "unknown" {
-            return _callback(false, "No valid output provided...", nil)
+    public func overrideOutput(output: String, callback: @escaping AudioSessionOverrideCallback) {
+        if output == "unknown" {
+            return callback(false, "No valid output provided...", nil)
         }
 
-        if self.currentOverride == _output {
-            return _callback(true, nil, nil)
+        if self.currentOverride == output {
+            return callback(true, nil, nil)
         }
 
         // make it async, cause in latest IOS it started to take ~1 sec and produce UI thread blocking issues
@@ -111,25 +111,25 @@ public class AudioSession: NSObject {
                 try session.setCategory(AVAudioSession.Category.playAndRecord, options: AVAudioSession.CategoryOptions.duckOthers)
             } catch {
                 CAPLog.print("AudioSession.overrideOutput() error setting sessions settings.")
-                _callback(false, "Error setting sessions settings.", true)
+                callback(false, "Error setting sessions settings.", true)
                 return
             }
 
             do {
-                if _output == "speaker" {
+                if output == "speaker" {
                     try session.overrideOutputAudioPort(.speaker)
                 } else {
                     try session.overrideOutputAudioPort(.none)
                 }
 
-                self.currentOverride = _output
+                self.currentOverride = output
 
-                CAPLog.print("currentOverride: " + (self.currentOverride ?? "") + " - " + _output)
+                CAPLog.print("currentOverride: " + (self.currentOverride ?? "") + " - " + output)
 
-                _callback(true, nil, nil)
+                callback(true, nil, nil)
             } catch {
                 CAPLog.print("AudioSession.overrideOutput() could not override output port.")
-                _callback(false, "Could not override output port.", true)
+                callback(false, "Could not override output port.", true)
             }
         }
     }
