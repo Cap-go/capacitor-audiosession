@@ -50,14 +50,14 @@ public class AudioSession: NSObject {
         let notificationCenter = NotificationCenter.default
 
         notificationCenter.addObserver(self,
-                       selector: #selector(self.handleRouteChange),
-                       name: AVAudioSession.routeChangeNotification,
-                       object: nil)
+                                       selector: #selector(self.handleRouteChange),
+                                       name: AVAudioSession.routeChangeNotification,
+                                       object: nil)
 
         notificationCenter.addObserver(self,
-                       selector: #selector(self.handleInterruption),
-                       name: AVAudioSession.interruptionNotification,
-                       object: AVAudioSession.sharedInstance)
+                                       selector: #selector(self.handleInterruption),
+                                       name: AVAudioSession.interruptionNotification,
+                                       object: AVAudioSession.sharedInstance)
     }
 
     // EVENTS
