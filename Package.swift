@@ -2,11 +2,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "CapgoCapacitorPluginAudioSession",
+    name: "CapgoCapacitorAudioSession",
     platforms: [.iOS(.v15)],
     products: [
         .library(
-            name: "CapgoCapacitorPluginAudioSession",
+            name: "CapgoCapacitorAudioSession",
             targets: ["AudioSessionPlugin"])
     ],
     dependencies: [
