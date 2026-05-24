@@ -32,9 +32,47 @@ if [ "${#packed_packages[@]}" -ne 1 ]; then
 fi
 
 plugin_name="$(bun -e 'console.log(require("./package.json").name)')"
-cp -R example-app/. "$test_app/"
+if [ -d example-app ]; then
+  cp -R example-app/. "$test_app/"
+else
+  cat > "$test_app/package.json" <<'JSON'
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html dist/index.html"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/cli": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/ios": "^8.0.0"
+  },
+  "devDependencies": {}
+}
+JSON
+  cat > "$test_app/capacitor.config.json" <<'JSON'
+{
+  "appId": "com.capgo.pluginexample",
+  "appName": "Plugin Example",
+  "webDir": "dist"
+}
+JSON
+  cat > "$test_app/index.html" <<'HTML'
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plugin Example</title>
+  </head>
+  <body></body>
+</html>
+HTML
+fi
 cd "$test_app"
-bun remove "$plugin_name"
+bun install
+bun remove "$plugin_name" || true
 bun add "${packed_packages[0]}"
 bun run build
 
