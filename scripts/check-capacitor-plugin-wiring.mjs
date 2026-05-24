@@ -199,6 +199,21 @@ function parseSpmNames(packageSwiftPath) {
   return { pkgName: pkg, libNames: uniq(libs) };
 }
 
+function toPascalCasePart(part) {
+  if (!part) return "";
+  return part[0].toUpperCase() + part.slice(1);
+}
+
+function packageNameToSpmProductName(packageName) {
+  if (typeof packageName !== "string") return "";
+  return packageName
+    .replace(/^@/, "")
+    .split(/[\/\W_]+/)
+    .filter(Boolean)
+    .map(toPascalCasePart)
+    .join("");
+}
+
 // ---------------- Validate ----------------
 const errors = [];
 
@@ -240,6 +255,16 @@ if (supportsIos) {
     }
     if (pkgName && libNames.length && !libNames.includes(pkgName)) {
       errors.push(`SPM: Package(name)=${pkgName} not present in .library(name) list ${JSON.stringify(libNames)}`);
+    }
+    if (typeof pkg.name !== "string" || !pkg.name.trim()) {
+      errors.push("package.json: missing valid string name");
+    } else {
+      const expectedProductName = packageNameToSpmProductName(pkg.name);
+      if (expectedProductName && libNames.length && !libNames.includes(expectedProductName)) {
+        errors.push(
+          `SPM: expected Capacitor product ${expectedProductName} from package.json name ${pkg.name}, but .library(name) list is ${JSON.stringify(libNames)}`
+        );
+      }
     }
   }
 }
