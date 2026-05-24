@@ -17,6 +17,11 @@ test_app="$tmp_root/plugin-example-app"
 
 cd "$repo_root"
 
+if [ ! -d "example-app" ]; then
+  echo "No example-app directory found; skipping packed package verification."
+  exit 0
+fi
+
 bun run build
 
 rm -rf "$pack_dir" "$test_app"
