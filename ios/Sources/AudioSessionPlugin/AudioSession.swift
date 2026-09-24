@@ -57,7 +57,7 @@ public class AudioSession: NSObject {
         notificationCenter.addObserver(self,
                                        selector: #selector(self.handleInterruption),
                                        name: AVAudioSession.interruptionNotification,
-                                       object: AVAudioSession.sharedInstance)
+                                       object: nil)
     }
 
     // EVENTS
