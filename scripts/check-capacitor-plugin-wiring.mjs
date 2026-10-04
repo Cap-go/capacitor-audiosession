@@ -204,14 +204,80 @@ function toPascalCasePart(part) {
   return part[0].toUpperCase() + part.slice(1);
 }
 
-function packageNameToSpmProductName(packageName) {
-  if (typeof packageName !== "string") return "";
+function packageNameParts(packageName) {
+  if (typeof packageName !== "string") return [];
   return packageName
     .replace(/^@/, "")
     .split(/[\/\W_]+/)
-    .filter(Boolean)
-    .map(toPascalCasePart)
-    .join("");
+    .filter(Boolean);
+}
+
+function packageNameToSpmProductName(packageName) {
+  return packageNameParts(packageName).map(toPascalCasePart).join("");
+}
+
+/** Capacitor CLI SPM product: scope + Capacitor + Plugin + remainder (e.g. CapgoCapacitorPluginAudioSession). */
+function packageNameToCapacitorSpmAliasProductName(packageName) {
+  const parts = packageNameParts(packageName).map((p) => p.toLowerCase());
+  const capacitorIdx = parts.findIndex((p) => p === "capacitor");
+  if (capacitorIdx === -1) return "";
+  const prefix = parts.slice(0, capacitorIdx + 1).map(toPascalCasePart).join("");
+  const suffix = parts.slice(capacitorIdx + 1).map(toPascalCasePart).join("");
+  return `${prefix}Plugin${suffix}`;
+}
+
+function collectSpmPackageJsonProductErrors(packageJsonName, libNames) {
+  const errors = [];
+  if (typeof packageJsonName !== "string" || !packageJsonName.trim()) {
+    errors.push("package.json: missing valid string name");
+    return errors;
+  }
+  const expectedCompatProduct = packageNameToSpmProductName(packageJsonName);
+  if (expectedCompatProduct && !libNames.includes(expectedCompatProduct)) {
+    errors.push(
+      `SPM: expected compat product ${expectedCompatProduct} from package.json name ${packageJsonName}, but .library(name) list is ${JSON.stringify(libNames)}`
+    );
+  }
+  const expectedCapacitorAlias = packageNameToCapacitorSpmAliasProductName(packageJsonName);
+  if (expectedCapacitorAlias && !libNames.includes(expectedCapacitorAlias)) {
+    errors.push(
+      `SPM: expected Capacitor CLI product alias ${expectedCapacitorAlias} from package.json name ${packageJsonName}, but .library(name) list is ${JSON.stringify(libNames)}`
+    );
+  }
+  return errors;
+}
+
+function runSelfTest() {
+  const sample = "@capgo/capacitor-audio-session";
+  const compat = packageNameToSpmProductName(sample);
+  const alias = packageNameToCapacitorSpmAliasProductName(sample);
+  if (compat !== "CapgoCapacitorAudioSession") {
+    console.error(`[wiring] self-test: compat name mismatch (got ${compat})`);
+    process.exit(1);
+  }
+  if (alias !== "CapgoCapacitorPluginAudioSession") {
+    console.error(`[wiring] self-test: alias name mismatch (got ${alias})`);
+    process.exit(1);
+  }
+  const missingAlias = collectSpmPackageJsonProductErrors(sample, ["CapgoCapacitorAudioSession"]);
+  if (!missingAlias.some((e) => e.includes("Capacitor CLI product alias"))) {
+    console.error("[wiring] self-test: removing alias product should fail the check");
+    process.exit(1);
+  }
+  const withBoth = collectSpmPackageJsonProductErrors(sample, [
+    "CapgoCapacitorAudioSession",
+    "CapgoCapacitorPluginAudioSession",
+  ]);
+  if (withBoth.length !== 0) {
+    console.error(`[wiring] self-test: both products should pass (${withBoth.join("; ")})`);
+    process.exit(1);
+  }
+  console.error("[wiring] self-test OK");
+}
+
+if (process.argv.includes("--self-test")) {
+  runSelfTest();
+  process.exit(0);
 }
 
 // ---------------- Validate ----------------
@@ -256,16 +322,7 @@ if (supportsIos) {
     if (pkgName && libNames.length && !libNames.includes(pkgName)) {
       errors.push(`SPM: Package(name)=${pkgName} not present in .library(name) list ${JSON.stringify(libNames)}`);
     }
-    if (typeof pkg.name !== "string" || !pkg.name.trim()) {
-      errors.push("package.json: missing valid string name");
-    } else {
-      const expectedProductName = packageNameToSpmProductName(pkg.name);
-      if (expectedProductName && !libNames.includes(expectedProductName)) {
-        errors.push(
-          `SPM: expected Capacitor product ${expectedProductName} from package.json name ${pkg.name}, but .library(name) list is ${JSON.stringify(libNames)}`
-        );
-      }
-    }
+    errors.push(...collectSpmPackageJsonProductErrors(pkg.name, libNames));
   }
 }
 
