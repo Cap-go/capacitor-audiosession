@@ -260,7 +260,7 @@ if (supportsIos) {
       errors.push("package.json: missing valid string name");
     } else {
       const expectedProductName = packageNameToSpmProductName(pkg.name);
-      if (expectedProductName && libNames.length && !libNames.includes(expectedProductName)) {
+      if (expectedProductName && !libNames.includes(expectedProductName)) {
         errors.push(
           `SPM: expected Capacitor product ${expectedProductName} from package.json name ${pkg.name}, but .library(name) list is ${JSON.stringify(libNames)}`
         );
