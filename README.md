@@ -1,11 +1,27 @@
 # @capgo/capacitor-plugin-audiosession
-<a href="https://capgo.app/"><img src="https://capgo.app/readme-banner.svg?repo=Cap-go/capacitor-audiosession" alt="Capgo - Instant updates for Capacitor" /></a>
+
+Know when audio is interrupted or the output route changes on iOS, for example when headphones are plugged in, and switch output to the speaker. Keeps call, voice and media apps in control of sound.
+
+<a href="https://capgo.app/?ref=plugin_audiosession"><img src="https://capgo.app/readme-banner.svg?repo=Cap-go/capacitor-audiosession" alt="Capgo - Instant updates for Capacitor" /></a>
 
 <div align="center">
-  <h2><a href="https://capgo.app/?ref=plugin_audiosession"> ➡️ Get Instant updates for your App with Capgo</a></h2>
-  <h2><a href="https://capgo.app/consulting/?ref=plugin_audiosession"> Missing a feature? We’ll build the plugin for you 💪</a></h2>
+  <p><b>Capgo</b>: open-source live updates for Ionic and Capacitor apps. Ship OTA fixes and features instantly, without waiting for app store review.</p>
+  <h2><a href="https://capgo.app/register/?ref=plugin_audiosession">➡️ Get started for free</a></h2>
+  <p>14-day unlimited free trial. No credit card required</p>
+  <p><a href="https://capgo.app/consulting/?ref=plugin_audiosession">Missing a feature? We'll build the plugin for you 💪</a></p>
 </div>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Cap-go/capacitor-audiosession/main/assets/github-social-preview.png" alt="@capgo/capacitor-audio-session for Capacitor apps" width="300" />
+</p>
+
+## Key features
+
+- **Current route**: `currentOutputs()` returns the active audio outputs.
+- **Override output**: `overrideOutput()` forces the speaker or returns to the default route.
+- **Route changes**: the `routeChanged` event fires when headphones or other devices connect or disconnect.
+- **Interruptions**: the `interruption` event fires when a call or another app interrupts audio.
+- **Platforms**: iOS. iOS only. Android and web are stubs.
 
 **This plugin works on iOS only.**
 
