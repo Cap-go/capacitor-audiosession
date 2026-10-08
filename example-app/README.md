@@ -13,6 +13,15 @@ Audio session routing is **iOS only**. Android and web builds show a friendly un
 
 ## Getting started
 
+From the repository root:
+
+```bash
+bun install
+bun run build
+```
+
+From `example-app`:
+
 ```bash
 bun install
 bun run start

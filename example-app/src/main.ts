@@ -79,14 +79,18 @@ const setListenerBadge = (active: boolean): void => {
   listenerStatus.dataset.active = String(active);
 };
 
-const refreshOutputs = async (): Promise<void> => {
+const refreshOutputs = async (updateResultPane = true): Promise<void> => {
   try {
     const outputs = await AudioSession.currentOutputs();
     renderOutputs(outputs);
-    setOutput({ currentOutputs: outputs });
+    if (updateResultPane) {
+      setOutput({ currentOutputs: outputs });
+    }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    setOutput(`Error: ${message}`);
+    if (updateResultPane) {
+      setOutput(`Error: ${message}`);
+    }
   }
 };
 
@@ -94,7 +98,7 @@ const overrideOutput = async (type: 'speaker' | 'default'): Promise<void> => {
   try {
     const result = await AudioSession.overrideOutput(type);
     setOutput({ overrideOutput: type, result });
-    await refreshOutputs();
+    await refreshOutputs(false);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     setOutput(`Error: ${message}`);

@@ -53,20 +53,13 @@ jobs:
           fi
           echo "bundle_version=${BUNDLE_VERSION}" >> "$GITHUB_OUTPUT"
 
-      - name: Capgo upload disabled notice
-        if: ${{ vars.CAPGO_EXAMPLE_UPLOAD_ENABLED != 'true' }}
-        run: |
-          echo "Skipping Capgo bundle upload."
-          echo "Set repository variable CAPGO_EXAMPLE_UPLOAD_ENABLED to true once app.capgo.audiosession exists in Capgo."
-
       - name: Deploy to Capgo
-        if: ${{ vars.CAPGO_EXAMPLE_UPLOAD_ENABLED == 'true' }}
         working-directory: example-app
         run: |
           bunx @capgo/cli@latest bundle upload app.capgo.audiosession \
             --path dist \
             --channel production \
-            --bundle "${{ steps.bundle_version.outputs.bundle_version }}" \
+            --bundle "$BUNDLE_VERSION" \
             --package-json package.json,../package.json \
             --node-modules node_modules,../node_modules \
             --delta \
@@ -74,4 +67,5 @@ jobs:
             --ignore-checksum-check \
             --apikey "$CAPGO_TOKEN"
         env:
+          BUNDLE_VERSION: ${{ steps.bundle_version.outputs.bundle_version }}
           CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}

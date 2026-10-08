@@ -16,6 +16,7 @@
     "@capacitor/android": "^8.5.2",
     "@capacitor/core": "^8.5.2",
     "@capacitor/ios": "^8.5.2",
+    "@capacitor/splash-screen": "^8.0.0",
     "@capgo/capacitor-audio-session": "file:..",
     "@capgo/capacitor-updater": "^8.45.11"
   },
