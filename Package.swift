@@ -6,6 +6,9 @@ let package = Package(
     platforms: [.iOS(.v15)],
     products: [
         .library(
+            name: "CapgoCapacitorPluginAudioSession",
+            targets: ["AudioSessionPlugin"]),
+        .library(
             name: "CapgoCapacitorAudioSession",
             targets: ["AudioSessionPlugin"])
     ],
