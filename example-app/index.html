@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>@capgo/capacitor-audio-session</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div class="brand-row">
+          <img class="brand-icon" src="/assets/capgo-icon.svg" width="40" height="40" alt="Capgo" />
+          <p class="eyebrow">Capgo plugin example</p>
+        </div>
+        <h1>Audio session lab</h1>
+        <p class="lead">
+          Query the active output route, override playback to the built-in speaker, and watch route changes and
+          interruptions. This plugin is <strong>iOS only</strong>; Android and browser builds use the unsupported panel
+          below.
+        </p>
+        <div class="chip-row">
+          <span id="platform-chip" class="chip">Platform</span>
+          <span id="support-chip" class="chip chip-muted">Support</span>
+        </div>
+      </header>
+
+      <section id="unsupported-panel" class="panel panel-warning hidden">
+        <p class="label">Not supported here</p>
+        <p class="panel-copy">
+          Audio session routing APIs run on iOS native builds only. You can still call <code>getPluginVersion()</code> on
+          this platform to confirm the plugin is linked.
+        </p>
+      </section>
+
+      <section id="ios-panel" class="panel">
+        <div class="status-row">
+          <div>
+            <p class="label">Current output routes</p>
+            <ul id="outputs-list" class="outputs-list">
+              <li class="muted">Tap refresh to load routes.</li>
+            </ul>
+          </div>
+          <button id="refresh-outputs" class="ghost" type="button">Refresh routes</button>
+        </div>
+
+        <div class="actions">
+          <button id="override-speaker" type="button">Override to speaker</button>
+          <button id="override-default" class="ghost" type="button">Restore default route</button>
+          <button id="get-version" class="ghost" type="button">Get plugin version</button>
+        </div>
+
+        <p class="label listeners-label">Event log</p>
+        <div class="log-toolbar">
+          <span id="listener-status" class="badge">Listeners idle</span>
+          <button id="clear-log" class="ghost small" type="button">Clear log</button>
+        </div>
+        <pre id="event-log" aria-live="polite">Waiting for events...</pre>
+        <pre id="plugin-output" class="result-pane">Action results appear here.</pre>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
