@@ -3,7 +3,7 @@ import Capacitor
 
 @objc(AudioSessionPlugin)
 public class AudioSessionPlugin: CAPPlugin, CAPBridgedPlugin {
-    private let pluginVersion: String = "8.1.3"
+    private let pluginVersion: String = "8.1.4"
     public let identifier = "AudioSessionPlugin"
     public let jsName = "AudioSession"
     public let pluginMethods: [CAPPluginMethod] = [
